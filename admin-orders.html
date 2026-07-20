@@ -14,9 +14,8 @@
 :root{
 
 --bg:#faf7ef;
---gold:#d8ad32;
---gold2:#f0ce65;
 --card:#fff;
+--gold:#d8ad32;
 --border:#eadbb8;
 --text:#17130d;
 
@@ -31,7 +30,6 @@ font-family:Segoe UI,Arial;
 }
 
 
-
 body{
 
 margin:0;
@@ -43,12 +41,12 @@ color:var(--text);
 }
 
 
-
 /* HEADER */
+
 
 header{
 
-height:80px;
+height:85px;
 
 background:white;
 
@@ -63,7 +61,6 @@ justify-content:space-between;
 padding:0 40px;
 
 }
-
 
 
 .logo{
@@ -96,7 +93,6 @@ font-weight:bold;
 
 
 
-/* MAIN */
 
 
 .container{
@@ -132,8 +128,9 @@ repeat(auto-fit,minmax(300px,1fr));
 
 gap:25px;
 
-}
+margin-top:25px;
 
+}
 
 
 
@@ -142,11 +139,11 @@ gap:25px;
 
 background:#fff;
 
+border:1px solid var(--border);
+
 padding:25px;
 
-border-radius:20px;
-
-border:1px solid var(--border);
+border-radius:25px;
 
 }
 
@@ -163,13 +160,13 @@ margin-top:0;
 
 .status{
 
+display:inline-block;
+
 padding:8px 15px;
 
 border-radius:20px;
 
 font-weight:bold;
-
-display:inline-block;
 
 }
 
@@ -177,12 +174,11 @@ display:inline-block;
 
 .pending{
 
-background:#fff1bd;
+background:#fff0b8;
 
 color:#8a6500;
 
 }
-
 
 
 .approved{
@@ -192,7 +188,6 @@ background:#c8ffd9;
 color:#008b38;
 
 }
-
 
 
 .rejected{
@@ -207,13 +202,31 @@ color:#b00000;
 
 
 
-button{
+.payment{
 
-padding:12px 20px;
+width:100%;
+
+height:180px;
+
+object-fit:cover;
+
+border-radius:15px;
+
+margin-top:15px;
+
+}
+
+
+
+
+
+button{
 
 border:none;
 
-border-radius:20px;
+padding:12px 20px;
+
+border-radius:25px;
 
 cursor:pointer;
 
@@ -247,24 +260,6 @@ color:white;
 
 
 
-.payment{
-
-width:100%;
-
-height:180px;
-
-object-fit:cover;
-
-border-radius:15px;
-
-margin-top:15px;
-
-}
-
-
-
-
-
 @media(max-width:600px){
 
 .container{
@@ -272,6 +267,7 @@ margin-top:15px;
 padding:20px;
 
 }
+
 
 header{
 
@@ -287,6 +283,7 @@ padding:0 20px;
 
 
 </head>
+
 
 
 <body>
@@ -317,7 +314,6 @@ Dashboard
 
 
 
-
 <div class="container">
 
 
@@ -334,16 +330,14 @@ Customer Orders
 
 <div class="orders" id="orders">
 
+</div>
+
+
 
 </div>
 
 
 </div>
-
-
-</div>
-
-
 
 
 
@@ -354,10 +348,19 @@ Customer Orders
 <script>
 
 
+// Login protection
 
-let orders = 
+if(localStorage.getItem("adminLogin") !== "true"){
 
-JSON.parse(
+window.location.href="admin.html";
+
+}
+
+
+
+
+
+let orders = JSON.parse(
 
 localStorage.getItem("orders")
 
@@ -365,24 +368,24 @@ localStorage.getItem("orders")
 
 ||
 
-[
 
+[
 
 {
 
 id:1001,
 
-customer:"Demo User",
+customer:"Demo Customer",
 
-email:"user@gmail.com",
+email:"customer@gmail.com",
 
 product:"ChatGPT Plus",
 
 amount:"₹499",
 
-status:"pending",
+payment:"",
 
-payment:""
+status:"pending"
 
 }
 
@@ -398,7 +401,6 @@ payment:""
 function loadOrders(){
 
 
-
 let box=document.getElementById("orders");
 
 
@@ -410,14 +412,7 @@ orders.forEach((order,index)=>{
 
 
 
-let statusClass =
-
-order.status;
-
-
-
 box.innerHTML += `
-
 
 
 <div class="order">
@@ -471,7 +466,7 @@ ${order.amount}
 
 
 
-<span class="status ${statusClass}">
+<span class="status ${order.status}">
 
 ${order.status}
 
@@ -479,23 +474,33 @@ ${order.status}
 
 
 
-${order.payment ? `
+${order.payment ?
+
+`
 
 <img class="payment"
 
 src="${order.payment}">
 
-` : ""}
+`
+
+:
+
+""
+
+}
 
 
 
-<br>
+
+
+<br><br>
 
 
 
 <button class="approve"
 
-onclick="approve(${index})">
+onclick="approveOrder(${index})">
 
 Approve
 
@@ -503,10 +508,9 @@ Approve
 
 
 
-
 <button class="reject"
 
-onclick="reject(${index})">
+onclick="rejectOrder(${index})">
 
 Reject
 
@@ -517,7 +521,6 @@ Reject
 </div>
 
 
-
 `;
 
 
@@ -525,7 +528,6 @@ Reject
 });
 
 
-
 }
 
 
@@ -534,13 +536,13 @@ Reject
 
 
 
-function approve(index){
+function approveOrder(index){
 
 
 orders[index].status="approved";
 
 
-save();
+saveOrders();
 
 
 }
@@ -549,15 +551,13 @@ save();
 
 
 
-
-
-function reject(index){
+function rejectOrder(index){
 
 
 orders[index].status="rejected";
 
 
-save();
+saveOrders();
 
 
 }
@@ -566,9 +566,7 @@ save();
 
 
 
-
-
-function save(){
+function saveOrders(){
 
 
 localStorage.setItem(
@@ -589,13 +587,12 @@ loadOrders();
 
 
 
-
-
 loadOrders();
 
 
 
 </script>
+
 
 
 </body>
