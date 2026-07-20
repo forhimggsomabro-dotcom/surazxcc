@@ -15,7 +15,6 @@
 
 --bg:#faf7ef;
 --gold:#d8ad32;
---gold2:#f0ce65;
 --border:#eadbb8;
 --text:#17130d;
 
@@ -23,28 +22,30 @@
 
 
 *{
+
 box-sizing:border-box;
 font-family:Segoe UI,Arial;
+
 }
 
 
 body{
 
 margin:0;
-
 background:var(--bg);
-
 color:var(--text);
 
 }
 
 
 
-/* HEADER */
-
 header{
 
 height:85px;
+
+background:white;
+
+border-bottom:1px solid var(--border);
 
 display:flex;
 
@@ -52,11 +53,7 @@ align-items:center;
 
 justify-content:space-between;
 
-padding:0 60px;
-
-background:white;
-
-border-bottom:1px solid var(--border);
+padding:0 50px;
 
 }
 
@@ -65,9 +62,7 @@ border-bottom:1px solid var(--border);
 .logo{
 
 font-size:28px;
-
 font-weight:900;
-
 color:var(--gold);
 
 }
@@ -76,27 +71,20 @@ color:var(--gold);
 
 .back{
 
-text-decoration:none;
-
 background:var(--gold);
-
-color:black;
-
 padding:12px 25px;
-
 border-radius:30px;
-
+text-decoration:none;
+color:black;
 font-weight:bold;
 
 }
 
 
 
-/* PRODUCT */
-
 .container{
 
-padding:60px;
+padding:50px 20px;
 
 display:flex;
 
@@ -106,33 +94,31 @@ justify-content:center;
 
 
 
-.product{
+.card{
 
 background:white;
 
-border:1px solid var(--border);
+width:500px;
+
+padding:35px;
 
 border-radius:30px;
 
-padding:40px;
-
-width:500px;
-
-box-shadow:0 20px 40px rgba(0,0,0,.1);
+border:1px solid var(--border);
 
 }
 
 
 
-.product img{
+.card img{
 
 width:100px;
 
 height:100px;
 
-border-radius:20px;
-
 object-fit:cover;
+
+border-radius:20px;
 
 }
 
@@ -144,15 +130,11 @@ display:inline-block;
 
 margin-top:20px;
 
-padding:8px 18px;
+padding:8px 15px;
 
 background:#fff2c7;
 
 border-radius:20px;
-
-color:#9b7500;
-
-font-weight:bold;
 
 }
 
@@ -160,63 +142,17 @@ font-weight:bold;
 
 h1{
 
-font-size:45px;
-
-margin-bottom:10px;
+font-size:42px;
 
 }
 
 
 
-.description{
+.desc{
 
 color:#806f50;
 
-font-size:18px;
-
 }
-
-
-
-.plans{
-
-display:flex;
-
-gap:15px;
-
-flex-wrap:wrap;
-
-margin-top:25px;
-
-}
-
-
-
-.plan{
-
-padding:15px 25px;
-
-border:1px solid var(--border);
-
-border-radius:20px;
-
-cursor:pointer;
-
-background:white;
-
-font-weight:bold;
-
-}
-
-
-
-.plan:hover{
-
-background:var(--gold);
-
-}
-
-
 
 
 
@@ -228,15 +164,50 @@ font-weight:900;
 
 color:var(--gold);
 
-margin:25px 0;
-
 }
 
 
 
 
+.duration{
 
-button{
+display:flex;
+
+gap:10px;
+
+flex-wrap:wrap;
+
+}
+
+
+
+.duration button{
+
+padding:12px 20px;
+
+border-radius:25px;
+
+border:1px solid var(--border);
+
+background:white;
+
+cursor:pointer;
+
+}
+
+
+
+.duration button:hover{
+
+background:var(--gold);
+
+}
+
+
+
+.buy{
+
+margin-top:25px;
 
 width:100%;
 
@@ -250,13 +221,9 @@ background:var(--gold);
 
 font-weight:bold;
 
-font-size:16px;
-
 cursor:pointer;
 
 }
-
-
 
 
 
@@ -270,22 +237,7 @@ font-weight:bold;
 
 
 
-
 @media(max-width:600px){
-
-.container{
-
-padding:25px;
-
-}
-
-
-.product{
-
-width:100%;
-
-}
-
 
 header{
 
@@ -293,15 +245,13 @@ padding:0 20px;
 
 }
 
+.card{
 
-h1{
-
-font-size:35px;
-
-}
+width:100%;
 
 }
 
+}
 
 </style>
 
@@ -336,23 +286,22 @@ Products
 
 
 
-
-
 <div class="container">
 
 
-<div class="product">
-
-
-<img src="logo.png">
+<div class="card">
 
 
 
-<div class="category" id="category">
+<img id="image" src="logo.png">
 
-AI
 
-</div>
+
+<span class="category" id="category">
+
+Loading...
+
+</span>
 
 
 
@@ -365,8 +314,22 @@ Loading...
 
 
 
+<p class="desc" id="description">
 
-<p class="description" id="description">
+</p>
+
+
+
+
+<div class="price" id="price">
+
+₹0
+
+</div>
+
+
+
+<p class="stock" id="stock">
 
 </p>
 
@@ -375,63 +338,44 @@ Loading...
 
 <h3>
 
-Choose Duration
+Choose Plan
 
 </h3>
 
 
 
-<div class="plans">
+<div class="duration">
 
 
-<div class="plan" onclick="selectPlan('1 Month',10)">
+<button onclick="selectPlan('30 Days')">
 
-1 Month
+30 Days
+
+</button>
+
+
+<button onclick="selectPlan('90 Days')">
+
+90 Days
+
+</button>
+
+
+<button onclick="selectPlan('180 Days')">
+
+180 Days
+
+</button>
+
 
 </div>
 
 
 
-<div class="plan" onclick="selectPlan('3 Months',25)">
 
-3 Months
+<button class="buy" onclick="checkout()">
 
-</div>
-
-
-
-<div class="plan" onclick="selectPlan('6 Months',45)">
-
-6 Months
-
-</div>
-
-
-</div>
-
-
-
-
-
-<div class="price" id="price">
-
-$10
-
-</div>
-
-
-
-<p class="stock">
-
-✓ Available Stock
-
-</p>
-
-
-
-<button onclick="orderNow()">
-
-Order Now
+Continue To Checkout
 
 </button>
 
@@ -450,69 +394,23 @@ Order Now
 
 
 
-<script>
+<script type="module">
+
+
+import { supabase } from "./supabase.js";
 
 
 
-let products=[
+let product=null;
 
-
-{
-
-name:"ChatGPT Plus",
-
-category:"AI",
-
-price:10,
-
-description:"Premium AI assistant access"
-
-},
-
-
-{
-
-name:"Netflix Premium",
-
-category:"Streaming",
-
-price:3,
-
-description:"4K entertainment access"
-
-},
-
-
-{
-
-name:"Spotify Premium",
-
-category:"Music",
-
-price:7,
-
-description:"Ad free music"
-
-},
-
-
-{
-
-name:"Canva Pro",
-
-category:"Design",
-
-price:5,
-
-description:"Premium design tools"
-
-}
-
-
-];
+let selectedDuration="30 Days";
 
 
 
+
+
+
+async function loadProduct(){
 
 
 
@@ -523,70 +421,81 @@ window.location.search
 
 
 
-let productName =
-params.get("name");
+let name=params.get("name");
 
 
 
-let selectedProduct =
-products.find(
+const {data,error}=await supabase
 
-p=>p.name==productName
+.from("products")
 
-);
+.select("*")
+
+.eq("name",name)
+
+.single();
 
 
 
 
 
-if(selectedProduct){
+if(error){
+
+console.log(error);
+
+document.getElementById("name")
+.innerHTML=
+"Product Not Found";
+
+return;
+
+}
+
+
+
+product=data;
+
 
 
 document.getElementById("name")
 .innerHTML=
-selectedProduct.name;
+product.name;
+
 
 
 document.getElementById("category")
 .innerHTML=
-selectedProduct.category;
+product.category;
+
 
 
 document.getElementById("description")
 .innerHTML=
-selectedProduct.description;
+product.description;
+
 
 
 document.getElementById("price")
 .innerHTML=
-"$"+selectedProduct.price;
+"₹"+product.price;
 
+
+
+document.getElementById("stock")
+.innerHTML=
+"✓ Stock Available: "
++
+product.stock;
+
+
+
+if(product.image){
+
+document.getElementById("image")
+.src=product.image;
 
 }
 
-
-
-
-
-let selectedDuration="1 Month";
-
-let selectedPrice=10;
-
-
-
-
-
-function selectPlan(duration,price){
-
-
-selectedDuration=duration;
-
-selectedPrice=price;
-
-
-document.getElementById("price")
-.innerHTML=
-"$"+price;
 
 
 }
@@ -596,20 +505,34 @@ document.getElementById("price")
 
 
 
-function orderNow(){
+
+window.selectPlan=function(plan){
+
+selectedDuration=plan;
+
+}
+
+
+
+
+
+
+
+window.checkout=function(){
+
 
 
 localStorage.setItem(
 
-"orderProduct",
+"selectedProduct",
 
 JSON.stringify({
 
-product:selectedProduct.name,
+name:product.name,
 
-duration:selectedDuration,
+price:product.price,
 
-price:selectedPrice
+duration:selectedDuration
 
 })
 
@@ -624,7 +547,16 @@ window.location.href="checkout.html";
 
 
 
+
+
+
+
+loadProduct();
+
+
+
 </script>
+
 
 
 </body>
