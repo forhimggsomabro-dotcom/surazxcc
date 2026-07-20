@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PANKAZXX Settings</title>
+
+
+<style>
+
+:root{
+
+--bg:#faf7ef;
+--gold:#d8ad32;
+--gold2:#f0ce65;
+--border:#eadbb8;
+
+}
+
+
+*{
+
+box-sizing:border-box;
+font-family:Segoe UI,Arial;
+
+}
+
+
+
+body{
+
+margin:0;
+
+background:var(--bg);
+
+}
+
+
+
+/* HEADER */
+
+header{
+
+height:80px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:space-between;
+
+padding:0 40px;
+
+background:white;
+
+border-bottom:1px solid var(--border);
+
+}
+
+
+
+.logo{
+
+font-size:28px;
+
+font-weight:900;
+
+color:#d8ad32;
+
+}
+
+
+
+.back{
+
+background:#d8ad32;
+
+color:black;
+
+padding:12px 25px;
+
+border-radius:30px;
+
+text-decoration:none;
+
+font-weight:bold;
+
+}
+
+
+
+
+.container{
+
+padding:40px;
+
+}
+
+
+
+
+.box{
+
+background:white;
+
+padding:30px;
+
+border-radius:25px;
+
+border:1px solid var(--border);
+
+max-width:700px;
+
+}
+
+
+
+h2{
+
+margin-top:0;
+
+}
+
+
+
+input,textarea{
+
+width:100%;
+
+padding:15px;
+
+margin:10px 0;
+
+border-radius:12px;
+
+border:1px solid var(--border);
+
+font-size:16px;
+
+}
+
+
+
+textarea{
+
+height:120px;
+
+resize:none;
+
+}
+
+
+
+button{
+
+padding:15px 35px;
+
+border:none;
+
+border-radius:30px;
+
+background:#d8ad32;
+
+font-weight:bold;
+
+cursor:pointer;
+
+}
+
+
+
+.preview{
+
+margin-top:30px;
+
+padding:25px;
+
+background:#17130d;
+
+color:white;
+
+border-radius:20px;
+
+}
+
+
+
+.preview img{
+
+width:80px;
+
+border-radius:15px;
+
+}
+
+
+
+@media(max-width:600px){
+
+.container{
+
+padding:20px;
+
+}
+
+
+header{
+
+padding:0 20px;
+
+}
+
+
+}
+
+</style>
+
+
+</head>
+
+
+
+<body>
+
+
+
+<header>
+
+
+<div class="logo">
+
+PANKAZXX SETTINGS
+
+</div>
+
+
+<a href="dashboard.html" class="back">
+
+Dashboard
+
+</a>
+
+
+</header>
+
+
+
+
+
+
+<div class="container">
+
+
+
+<div class="box">
+
+
+<h2>
+
+Website Settings
+
+</h2>
+
+
+
+
+<label>
+
+Store Name
+
+</label>
+
+<input id="storeName"
+placeholder="PANKAZXX SHOP">
+
+
+
+
+
+
+<label>
+
+Logo URL
+
+</label>
+
+
+<input id="logo"
+placeholder="https://image-url.com/logo.png">
+
+
+
+
+
+<label>
+
+Homepage Title
+
+</label>
+
+
+<input id="title"
+placeholder="Premium subs & accounts">
+
+
+
+
+
+<label>
+
+Homepage Description
+
+</label>
+
+
+<textarea id="description"
+placeholder="Fast, cheap, real.">
+
+</textarea>
+
+
+
+
+
+<label>
+
+WhatsApp Link
+
+</label>
+
+
+<input id="whatsapp"
+placeholder="https://wa.me/xxxxxxxx">
+
+
+
+
+
+
+<label>
+
+Telegram Username
+
+</label>
+
+
+<input id="telegram"
+placeholder="@PANKAZXX_support">
+
+
+
+
+
+
+<label>
+
+Theme Color
+
+</label>
+
+
+<input id="color"
+type="color"
+value="#d8ad32">
+
+
+
+
+
+<button onclick="saveSettings()">
+
+Save Changes
+
+</button>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="preview">
+
+
+<h2>
+
+Preview
+
+</h2>
+
+
+<img id="previewLogo"
+src="">
+
+
+<h2 id="previewName">
+
+PANKAZXX SHOP
+
+</h2>
+
+
+<p id="previewText">
+
+Premium digital access
+
+</p>
+
+
+
+</div>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<script>
+
+
+let settings =
+
+JSON.parse(
+
+localStorage.getItem("settings")
+
+)
+
+||
+
+{};
+
+
+
+
+
+
+function saveSettings(){
+
+
+
+settings={
+
+
+storeName:
+
+document.getElementById("storeName").value,
+
+
+logo:
+
+document.getElementById("logo").value,
+
+
+title:
+
+document.getElementById("title").value,
+
+
+description:
+
+document.getElementById("description").value,
+
+
+whatsapp:
+
+document.getElementById("whatsapp").value,
+
+
+telegram:
+
+document.getElementById("telegram").value,
+
+
+color:
+
+document.getElementById("color").value
+
+
+
+};
+
+
+
+
+localStorage.setItem(
+
+"settings",
+
+JSON.stringify(settings)
+
+);
+
+
+
+loadPreview();
+
+
+
+alert("Settings Saved");
+
+
+}
+
+
+
+
+
+
+
+
+function loadPreview(){
+
+
+document.getElementById("previewName")
+.innerHTML =
+
+settings.storeName ||
+
+"PANKAZXX SHOP";
+
+
+
+document.getElementById("previewText")
+.innerHTML =
+
+settings.description ||
+
+"Premium digital access";
+
+
+
+if(settings.logo)
+
+{
+
+document.getElementById("previewLogo")
+.src=settings.logo;
+
+}
+
+
+}
+
+
+
+
+function load(){
+
+
+document.getElementById("storeName").value=
+settings.storeName || "";
+
+document.getElementById("logo").value=
+settings.logo || "";
+
+document.getElementById("title").value=
+settings.title || "";
+
+document.getElementById("description").value=
+settings.description || "";
+
+document.getElementById("whatsapp").value=
+settings.whatsapp || "";
+
+document.getElementById("telegram").value=
+settings.telegram || "";
+
+
+}
+
+
+
+
+load();
+
+loadPreview();
+
+
+
+</script>
+
+
+</body>
+
+</html>
