@@ -6,19 +6,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Products - Digital Store</title>
+<title>PANKAZXX SHOP - Products</title>
 
 
 <style>
 
 :root{
 
---bg:#080716;
---panel:#14122b;
---violet:#7c5cff;
---pink:#ff4fd8;
---cyan:#3ee6e0;
---text:#aaa5c9;
+--bg:#faf7ef;
+--gold:#d8ad32;
+--gold2:#f0ce65;
+--text:#17130d;
+--muted:#806f50;
+--border:#eadbb8;
+--card:#ffffff;
 
 }
 
@@ -26,32 +27,27 @@
 *{
 
 box-sizing:border-box;
-font-family:"Segoe UI",Arial;
+font-family:Segoe UI,Arial;
 
 }
-
 
 
 body{
 
 margin:0;
 
-background:
-radial-gradient(circle at top,#29145e,transparent 40%),
-var(--bg);
+background:var(--bg);
 
-color:white;
+color:var(--text);
 
 }
 
 
-
 /* HEADER */
-
 
 header{
 
-height:70px;
+height:90px;
 
 display:flex;
 
@@ -59,9 +55,11 @@ align-items:center;
 
 justify-content:space-between;
 
-padding:0 25px;
+padding:15px 60px;
 
-background:#14122bee;
+background:white;
+
+border-bottom:1px solid var(--border);
 
 position:sticky;
 
@@ -79,35 +77,37 @@ font-size:25px;
 
 font-weight:900;
 
-background:
-linear-gradient(90deg,var(--violet),var(--pink),var(--cyan));
-
--webkit-background-clip:text;
-
-color:transparent;
+color:var(--gold);
 
 }
 
 
 
-.back{
+nav a{
+
+margin-left:20px;
 
 text-decoration:none;
 
-color:white;
+color:#705b30;
 
-padding:10px 20px;
-
-border-radius:20px;
-
-background:linear-gradient(
-90deg,
-var(--violet),
-var(--pink)
-);
+font-weight:bold;
 
 }
 
+
+
+.btn{
+
+background:var(--gold);
+
+padding:12px 25px;
+
+border-radius:30px;
+
+color:black!important;
+
+}
 
 
 
@@ -126,14 +126,17 @@ padding:70px 20px;
 
 .hero h1{
 
-font-size:45px;
+font-size:55px;
 
-background:
-linear-gradient(90deg,#fff,var(--cyan),var(--pink));
+margin:0;
 
--webkit-background-clip:text;
+}
 
-color:transparent;
+
+
+.hero span{
+
+color:var(--gold);
 
 }
 
@@ -141,7 +144,9 @@ color:transparent;
 
 .hero p{
 
-color:var(--text);
+color:var(--muted);
+
+font-size:18px;
 
 }
 
@@ -156,27 +161,73 @@ color:var(--text);
 
 text-align:center;
 
-padding:20px;
-
 }
 
 
 
 .search input{
 
-width:300px;
+width:350px;
 
 max-width:90%;
 
-padding:15px;
+padding:16px 20px;
 
 border-radius:30px;
 
-border:none;
+border:1px solid var(--border);
 
-outline:none;
+font-size:16px;
 
 }
+
+
+
+
+
+/* FILTER */
+
+
+.filters{
+
+display:flex;
+
+justify-content:center;
+
+gap:12px;
+
+flex-wrap:wrap;
+
+padding:30px;
+
+}
+
+
+
+.filters button{
+
+background:white;
+
+border:1px solid var(--border);
+
+padding:12px 22px;
+
+border-radius:30px;
+
+cursor:pointer;
+
+font-weight:bold;
+
+}
+
+
+
+.filters button:hover{
+
+background:var(--gold);
+
+}
+
 
 
 
@@ -186,58 +237,62 @@ outline:none;
 
 .products{
 
-display:flex;
+display:grid;
 
-justify-content:center;
+grid-template-columns:
+
+repeat(auto-fit,minmax(260px,1fr));
 
 gap:25px;
 
-padding:40px 20px;
-
-flex-wrap:wrap;
+padding:40px 60px;
 
 }
+
 
 
 
 .card{
 
-width:300px;
+background:white;
 
-background:var(--panel);
+border:1px solid var(--border);
+
+border-radius:25px;
 
 padding:25px;
 
-border-radius:20px;
-
-box-shadow:
-0 20px 50px black;
-
-transition:.3s;
+box-shadow:0 15px 30px rgba(0,0,0,.08);
 
 }
 
 
 
-.card:hover{
+.card img{
 
-transform:translateY(-8px);
+width:70px;
+
+height:70px;
+
+border-radius:15px;
+
+object-fit:cover;
 
 }
 
 
 
-.badge{
+.category{
 
 display:inline-block;
 
-background:#ffb84f;
+background:#fff4d5;
 
-color:black;
+color:#a57b00;
 
-padding:5px 12px;
+padding:6px 12px;
 
-border-radius:10px;
+border-radius:20px;
 
 font-size:12px;
 
@@ -247,9 +302,10 @@ font-weight:bold;
 
 
 
+
 .card h2{
 
-margin-top:20px;
+margin-bottom:5px;
 
 }
 
@@ -257,7 +313,7 @@ margin-top:20px;
 
 .desc{
 
-color:var(--text);
+color:var(--muted);
 
 }
 
@@ -265,44 +321,27 @@ color:var(--text);
 
 .price{
 
-font-size:38px;
+font-size:35px;
 
 font-weight:900;
 
-color:var(--cyan);
+color:var(--gold);
 
 }
 
 
 
-.stock{
-
-color:#6cff9c;
-
-}
-
-
-
-
-button{
+button.buy{
 
 width:100%;
 
-padding:14px;
+padding:15px;
 
-border:0;
+border:none;
 
-border-radius:12px;
+border-radius:15px;
 
-background:
-
-linear-gradient(
-90deg,
-var(--violet),
-var(--pink)
-);
-
-color:white;
+background:var(--gold);
 
 font-weight:bold;
 
@@ -312,46 +351,96 @@ cursor:pointer;
 
 
 
-button:hover{
 
-filter:brightness(1.2);
+button.buy:hover{
+
+background:var(--gold2);
 
 }
 
+
+
+/* WHATSAPP */
+
+
+.whatsapp{
+
+position:fixed;
+
+right:25px;
+
+bottom:25px;
+
+background:#25D366;
+
+color:white;
+
+height:60px;
+
+width:60px;
+
+border-radius:50%;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-size:25px;
+
+text-decoration:none;
+
+}
 
 
 
 footer{
 
+background:#17130d;
+
+color:white;
+
 padding:30px;
 
 text-align:center;
 
-color:var(--text);
-
 }
 
 
 
-@media(max-width:600px){
+
+@media(max-width:700px){
+
+
+header{
+
+padding:15px 20px;
+
+}
+
+
+nav{
+
+display:none;
+
+}
 
 
 .hero h1{
 
-font-size:32px;
+font-size:38px;
 
 }
 
 
-.card{
+.products{
 
-width:90%;
-
-}
-
+padding:20px;
 
 }
 
+}
 
 
 </style>
@@ -363,26 +452,47 @@ width:90%;
 
 
 
-
 <header>
 
 
 <div class="logo">
 
-Digital Store
+PANKAZXX SHOP
 
 </div>
 
 
-<a class="back" href="index.html">
 
+<nav>
+
+
+<a href="index.html">
 Home
+</a>
+
+
+<a href="products.html">
+Products
+</a>
+
+
+<a href="admin.html">
+Admin
+</a>
+
+
+<a class="btn"
+href="checkout.html">
+
+Order
 
 </a>
 
 
-</header>
+</nav>
 
+
+</header>
 
 
 
@@ -394,14 +504,14 @@ Home
 
 <h1>
 
-Choose Your Subscription
+Premium <span>Digital Products</span>
 
 </h1>
 
 
 <p>
 
-Select a plan and get premium access.
+Choose your subscription and get instant access.
 
 </p>
 
@@ -414,16 +524,63 @@ Select a plan and get premium access.
 
 
 
+
 <div class="search">
 
 
-<input 
+<input
 id="search"
 placeholder="Search products..."
 onkeyup="searchProducts()">
 
 
 </div>
+
+
+
+
+
+
+<div class="filters">
+
+
+<button onclick="filterProducts('All')">
+
+All
+
+</button>
+
+
+<button onclick="filterProducts('AI')">
+
+AI
+
+</button>
+
+
+<button onclick="filterProducts('Streaming')">
+
+Streaming
+
+</button>
+
+
+<button onclick="filterProducts('Gaming')">
+
+Gaming
+
+</button>
+
+
+<button onclick="filterProducts('Design')">
+
+Design
+
+</button>
+
+
+</div>
+
 
 
 
@@ -440,12 +597,27 @@ onkeyup="searchProducts()">
 
 
 
-
 <footer>
 
-© 2026 Digital Store
+PANKAZXX SHOP
+<br>
+Premium Access. Best Prices.
 
 </footer>
+
+
+
+
+
+
+
+<a class="whatsapp"
+href="https://wa.me/"
+target="_blank">
+
+☎
+
+</a>
 
 
 
@@ -463,17 +635,15 @@ let products=[
 
 {
 
-name:"AI Premium",
+name:"ChatGPT Plus",
 
-price:499,
+category:"AI",
 
-duration:"30 Days",
+price:"$10",
 
-stock:20,
+description:"Premium AI assistant access",
 
-description:"Premium AI tools access",
-
-badge:"BEST SELLER"
+image:"logo.png"
 
 },
 
@@ -481,36 +651,47 @@ badge:"BEST SELLER"
 
 {
 
-name:"Gaming Plan",
+name:"Netflix Premium",
 
-price:299,
+category:"Streaming",
 
-duration:"30 Days",
+price:"$3",
 
-stock:50,
+description:"4K streaming subscription",
 
-description:"Gaming premium subscription",
-
-badge:"POPULAR"
+image:"logo.png"
 
 },
 
 
 
+{
+
+name:"Spotify Premium",
+
+category:"Music",
+
+price:"$7",
+
+description:"Ad-free music experience",
+
+image:"logo.png"
+
+},
+
+
 
 {
 
-name:"Cloud Storage Pro",
+name:"Canva Pro",
 
-price:199,
+category:"Design",
 
-duration:"12 Months",
+price:"$5",
 
-stock:35,
+description:"Premium design tools",
 
-description:"1TB Cloud Storage",
-
-badge:"NEW"
+image:"logo.png"
 
 }
 
@@ -521,9 +702,13 @@ badge:"NEW"
 
 
 
+let current=products;
 
 
-function loadProducts(data=products){
+
+
+
+function showProducts(data){
 
 
 let box=document.getElementById("products");
@@ -533,66 +718,57 @@ box.innerHTML="";
 
 
 
-data.forEach(product=>{
+data.forEach(p=>{
 
 
-box.innerHTML += `
+box.innerHTML+=`
 
 
 <div class="card">
 
 
-<span class="badge">
+<img src="${p.image}">
 
-${product.badge}
+
+<br><br>
+
+
+<span class="category">
+
+${p.category}
 
 </span>
 
 
 <h2>
 
-${product.name}
+${p.name}
 
 </h2>
 
 
 <p class="desc">
 
-${product.description}
+${p.description}
 
 </p>
 
 
-
 <div class="price">
 
-₹${product.price}
+${p.price}
 
 </div>
 
 
 
-<p>
-
-Duration:
-${product.duration}
-
-</p>
+<br>
 
 
+<button class="buy"
+onclick="buy('${p.name}')">
 
-<p class="stock">
-
-Available:
-${product.stock}
-
-</p>
-
-
-
-<button onclick="buy('${product.name}')">
-
-Buy Now
+View Plans
 
 </button>
 
@@ -601,6 +777,7 @@ Buy Now
 
 
 `;
+
 
 });
 
@@ -611,29 +788,63 @@ Buy Now
 
 
 
+function filterProducts(cat){
+
+
+if(cat=="All"){
+
+current=products;
+
+}
+
+else{
+
+current=products.filter(
+
+p=>p.category==cat
+
+);
+
+}
+
+
+showProducts(current);
+
+
+}
+
+
+
+
+
+
 
 function searchProducts(){
 
 
 let value=
-document.getElementById("search").value.toLowerCase();
+
+document.getElementById("search")
+.value
+.toLowerCase();
 
 
 
-let result =
-products.filter(p=>
+let result=current.filter(
 
-p.name.toLowerCase().includes(value)
+p=>
+
+p.name.toLowerCase()
+.includes(value)
 
 );
 
 
 
-loadProducts(result);
+showProducts(result);
 
 
 }
-
 
 
 
@@ -642,13 +853,9 @@ loadProducts(result);
 function buy(product){
 
 
-alert(
-"Selected: "+product+
-"\nPayment page will open here"
-);
+window.location.href=
 
-
-// Later connect Firebase order system
+"product.html?name="+product;
 
 
 }
@@ -658,12 +865,11 @@ alert(
 
 
 
-loadProducts();
+showProducts(products);
 
 
 
 </script>
-
 
 
 </body>
